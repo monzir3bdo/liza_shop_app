@@ -1,4 +1,4 @@
-# ecommerce
+# Liza - Ecommerce With Clean Architecture
 
 A new Flutter project.
 
