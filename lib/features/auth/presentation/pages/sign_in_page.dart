@@ -1,5 +1,6 @@
 import 'package:ecommerce/core/font_style_manager.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
+import 'package:ecommerce/features/auth/presentation/widgets/get_start/custom_sign_in_form.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/remember_me_widget.dart';
 import 'package:ecommerce/features/products/presentation/pages/products_page.dart';
 
@@ -53,43 +54,7 @@ class SignInPage extends StatelessWidget {
             height: 80,
           ),
         ),
-        const SliverToBoxAdapter(
-          child: AuthFormField(name: 'UserName'),
-        ),
-        const SliverToBoxAdapter(
-          child: AuthFormField(name: 'Password'),
-        ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 28,
-          ),
-        ),
-        const SliverToBoxAdapter(
-          child: ForgetPasswordWidget(text: 'ForgetPassword?'),
-        ),
-        const SliverToBoxAdapter(
-          child: RememberMeWidget(),
-        ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 140,
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: CustomButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductsPage(),
-                ),
-              );
-            },
-            height: 75,
-            width: double.infinity,
-            buttonText: 'Sign In',
-          ),
-        )
+        CustomSignInForm(),
       ],
     );
   }

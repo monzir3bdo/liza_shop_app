@@ -1,11 +1,14 @@
 import 'package:ecommerce/core/font_style_manager.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
+import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/remember_me_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../products/presentation/pages/products_page.dart';
 import '../widgets/get_start/auth_form_field.dart';
+import '../widgets/get_start/custom_auth_form_field.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -36,42 +39,8 @@ class SignUpPage extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(
-          child: AuthFormField(name: 'UserName'),
+          child: CustomAuthForm(),
         ),
-        const SliverToBoxAdapter(
-          child: AuthFormField(name: 'Password'),
-        ),
-        const SliverToBoxAdapter(
-          child: AuthFormField(name: 'Email Address'),
-        ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 40,
-          ),
-        ),
-        const SliverToBoxAdapter(
-          child: RememberMeWidget(),
-        ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 140,
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: CustomButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductsPage(),
-                ),
-              );
-            },
-            height: 75,
-            width: double.infinity,
-            buttonText: 'Sign Up',
-          ),
-        )
       ],
     );
   }

@@ -1,7 +1,11 @@
 import 'package:ecommerce/core/font_style_manager.dart';
+import 'package:ecommerce/core/functions/navigation.dart';
+import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
 
 import 'package:ecommerce/features/auth/presentation/pages/get_start_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});
@@ -46,10 +50,7 @@ class OnBoardingPage extends StatelessWidget {
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const GetStart()));
+                  customNavigate(context, '/getStart');
                 },
                 child: const Text(
                   'Skip',

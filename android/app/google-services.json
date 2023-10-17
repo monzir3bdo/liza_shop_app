@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "515356024244",
+    "project_id": "liza-e1eaf",
+    "storage_bucket": "liza-e1eaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515356024244:android:e147e5c93b9df5baff26e1",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgaHz4ReQdoE04vDQbeWgAnFTp6mH5ejA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/network/network_info.dart';
+import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ecommerce/features/products/data/data_sourcs/product_remote_data_source.dart';
 import 'package:ecommerce/features/products/data/data_sourcs/products_local_data_source.dart';
 import 'package:ecommerce/features/products/data/repository/products_repository_%20impl.dart';
@@ -22,6 +23,7 @@ Future<void> init() async {
       getAllProducts: sl(),
     ),
   );
+  sl.registerSingleton<AuthCubit>(AuthCubit());
   //use cases
   sl.registerLazySingleton(
     () => GetAllProductsUseCase(

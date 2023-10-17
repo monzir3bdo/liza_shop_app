@@ -1,12 +1,20 @@
+import 'package:ecommerce/core/app_router.dart';
+import 'package:ecommerce/core/functions/check_state_changes.dart';
 import 'package:ecommerce/features/products/presentation/bloc/products/bloc/products_bloc.dart';
 import 'package:ecommerce/features/splash/presentation/pages/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection_container.dart' as di;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await di.init();
+  checkStateChanges();
   runApp(const MyApp());
 }
 
@@ -25,14 +33,9 @@ class MyApp extends StatelessWidget {
             ),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: appRouter,
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const SplashPage(),
       ),
     );
   }

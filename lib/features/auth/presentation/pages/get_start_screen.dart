@@ -1,9 +1,11 @@
 import 'package:ecommerce/core/font_style_manager.dart';
+import 'package:ecommerce/core/functions/navigation.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
 import 'package:ecommerce/features/auth/presentation/pages/sign_in_page.dart';
-import 'package:ecommerce/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:ecommerce/features/auth/presentation/pages/log_in_page.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/all_social_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class GetStart extends StatelessWidget {
   const GetStart({super.key});
@@ -81,12 +83,7 @@ class GetStart extends StatelessWidget {
           ),
           CustomButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUpPage(),
-                ),
-              );
+              customNavigate(context, '/signUp');
             },
             buttonText: 'Create an Account',
             height: 75,

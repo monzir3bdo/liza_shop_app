@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/auth/presentation/pages/onboard_page.dart';
+import 'package:ecommerce/core/functions/navigation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,8 +17,7 @@ class _SplashPageState extends State<SplashPage> {
         const Duration(
           seconds: 2,
         ), () {
-      return Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const OnBoardingPage()));
+      customReplacmentNavigation(context, '/onboarding');
     });
     super.initState();
   }
