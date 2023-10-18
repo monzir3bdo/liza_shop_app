@@ -43,6 +43,7 @@ dependencies:
   http: ^1.1.0
   internet_connection_checker: ^1.0.0+1
   shared_preferences: ^2.2.1
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -76,6 +77,9 @@ flutter:
          - asset: assets/fonts/Inter-SemiBold.ttf
          - asset: assets/fonts/Inter-Regular.ttf
          - asset: assets/fonts/Inter-Medium.ttf
+     - family: Abel-Regular
+       fonts:
+         - asset: assets/fonts/Abel-Regular.ttf
 
 
 

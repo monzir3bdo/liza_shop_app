@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/app_router.dart';
+import 'package:ecommerce/core/database/cache/cache_helper.dart';
 import 'package:ecommerce/core/functions/check_state_changes.dart';
 import 'package:ecommerce/features/products/presentation/bloc/products/bloc/products_bloc.dart';
 import 'package:ecommerce/features/splash/presentation/pages/splash_view.dart';
@@ -14,7 +15,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await di.init();
-  checkStateChanges();
+  await CacheHelper().init();
+  checkUserStateChanges();
   runApp(const MyApp());
 }
 

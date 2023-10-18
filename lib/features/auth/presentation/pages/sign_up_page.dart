@@ -1,12 +1,12 @@
 import 'package:ecommerce/core/font_style_manager.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/custom_bottom_text.dart';
-import 'package:ecommerce/features/auth/presentation/widgets/get_start/custom_login_form.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../../../core/functions/navigation.dart';
+import '../widgets/get_start/custom_sign_up_form.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +28,19 @@ class LoginPage extends StatelessWidget {
         SliverToBoxAdapter(
           child: Align(
             child: Text(
-              "Welcome",
+              "Sign Up",
               style: FontManager.interSemiBold28,
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Align(
-            child: Text(
-              "Please enter your data to continue",
-              style: FontManager.interRegular13.copyWith(
-                fontWeight: FontWeight.w200,
-                fontSize: 15,
-              ),
-            ),
-          ),
-        ),
         const SliverToBoxAdapter(
-          child: CustomLoginForm(),
+          child: CustomSignUpForm(),
         ),
         const SliverToBoxAdapter(
           child: CustomBottomText(
-            text: "Don't have an account? ",
-            textButtonName: 'Sign Up',
-            destination: 'signup',
+            text: 'Already have an account? ',
+            textButtonName: 'Login',
+            destination: 'login',
           ),
         )
       ],

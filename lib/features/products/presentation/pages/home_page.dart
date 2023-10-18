@@ -1,6 +1,8 @@
+import 'package:ecommerce/core/functions/navigation.dart';
 import 'package:ecommerce/features/products/presentation/widgets/product_page/product_widget.dart';
 import 'package:ecommerce/features/products/presentation/widgets/product_page/products_grid_view_widget.dart';
 import 'package:ecommerce/features/products/presentation/widgets/product_page/text_form_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/font_style_manager.dart';
@@ -46,7 +48,10 @@ class _HomePageState extends State<HomePage> {
               iconSize: 30,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                customReplacmentNavigation(context, '/get');
+              },
               icon: Image.asset('assets/images/cart_icon.png'),
               iconSize: 30,
             ),

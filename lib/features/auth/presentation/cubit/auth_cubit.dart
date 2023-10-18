@@ -1,16 +1,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce/features/auth/presentation/cubit/log_in/login_states.dart';
+import 'package:ecommerce/features/auth/presentation/cubit/password_change_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final signUpKey = GlobalKey();
-  final logInKey = GlobalKey();
+  final GlobalKey<FormState> signUpKey = GlobalKey();
+  final GlobalKey<FormState> logInKey = GlobalKey();
   late String emailAddress;
   late String password;
   late String userName;
+  bool obscureText = true;
 
   AuthCubit() : super(AuthInitial());
   createUserWithEmailAndPassword() async {
@@ -36,20 +38,32 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  signInWithEmailAndPassword() async {
+  loginWithEmailAndPassword() async {
     try {
       emit(LoginLoadingState());
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
       emit(LoginSuccessState());
     } on FirebaseAuthException catch (e) {
-      emit(LoginFailureState(message: e.message.toString()));
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        emit(LoginFailureState(message: 'No user found for that email.'));
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        emit(LoginFailureState(message: 'No user found for that email.'));
+      } else {
+        emit(LoginFailureState(message: 'check your email and password!'));
       }
     }
+  }
+
+  void obscurePasswordText() {
+    if (obscureText == true) {
+      obscureText = false;
+    } else {
+      obscureText = true;
+    }
+    emit(PasswordChangeState());
   }
 
   signOut() async {

@@ -1,8 +1,8 @@
 import 'package:ecommerce/core/font_style_manager.dart';
 import 'package:ecommerce/core/functions/navigation.dart';
 import 'package:ecommerce/core/widgets/custom_button.dart';
-import 'package:ecommerce/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:ecommerce/features/auth/presentation/pages/log_in_page.dart';
+import 'package:ecommerce/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/all_social_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +16,7 @@ class GetStart extends StatelessWidget {
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: _buildBody(context),
+        backgroundColor: Colors.white,
       ),
     );
   }
@@ -23,6 +24,7 @@ class GetStart extends StatelessWidget {
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 0,
+      backgroundColor: Colors.white,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
@@ -53,7 +55,7 @@ class GetStart extends StatelessWidget {
           ),
           const AllSocialButtons(),
           const SizedBox(
-            height: 250,
+            height: 200,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,15 +63,12 @@ class GetStart extends StatelessWidget {
               const Text('Already have account? '),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInPage()));
+                  customNavigate(context, '/login');
                 },
                 style: TextButton.styleFrom(
                     padding: EdgeInsets.zero, alignment: Alignment.centerLeft),
                 child: const Text(
-                  'Sign In',
+                  'Log In',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -86,8 +85,8 @@ class GetStart extends StatelessWidget {
               customNavigate(context, '/signUp');
             },
             buttonText: 'Create an Account',
-            height: 75,
-            width: double.infinity,
+            height: 67,
+            width: 364,
           ),
         ],
       ),

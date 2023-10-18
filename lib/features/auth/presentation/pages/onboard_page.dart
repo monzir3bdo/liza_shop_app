@@ -1,11 +1,7 @@
-import 'package:ecommerce/core/font_style_manager.dart';
+import 'package:ecommerce/core/database/cache/cache_helper.dart';
 import 'package:ecommerce/core/functions/navigation.dart';
-import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
-
-import 'package:ecommerce/features/auth/presentation/pages/get_start_screen.dart';
+import 'package:ecommerce/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});
@@ -13,67 +9,67 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff3D93F8),
-      body: _buildBody(),
-      bottomSheet: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-        ),
-        height: 400,
-        width: 400,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Look Good, Feel Good',
-              style: FontManager.interSemiBold28.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Create your individual & unique style and look amazing everyday.',
-              textAlign: TextAlign.center,
-              style: FontManager.interRegular13.copyWith(
-                fontSize: 19,
-                fontWeight: FontWeight.w100,
-              ),
-            ),
-            const SizedBox(
-              height: 200,
-            ),
-            TextButton(
-                onPressed: () {
-                  customNavigate(context, '/getStart');
-                },
-                child: const Text(
-                  'Skip',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                )),
-          ],
-        ),
-      ),
+      body: _buildBody(context),
     );
   }
 
-  _buildBody() {
-    return Column(
-      children: [
-        Center(
-          child: Image.asset(
-            'assets/images/onboarding.png',
-            fit: BoxFit.cover,
+  _buildBody(context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/onboarding_man.png',
           ),
+          fit: BoxFit.cover,
         ),
-      ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 31),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Text(
+              'Welcome To our Store',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 48,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Abel-Regular',
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+            ),
+            const SizedBox(
+              height: 19,
+            ),
+            const Text(
+              'Get What you want in one application',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(
+              height: 41,
+            ),
+            CustomButton(
+                onPressed: () {
+                  CacheHelper()
+                      .saveData(key: 'isOnboardingVisited', value: true);
+                  customNavigate(context, '/get');
+                },
+                buttonText: "Get Started",
+                height: 67,
+                width: 350),
+            const SizedBox(
+              height: 87,
+            )
+          ],
+        ),
+      ),
     );
   }
 }

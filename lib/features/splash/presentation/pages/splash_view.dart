@@ -1,7 +1,11 @@
 import 'package:ecommerce/core/functions/navigation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ecommerce/injection_container.dart' as di;
+import '../../../../core/database/cache/cache_helper.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -11,13 +15,21 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  bool isOnboardingVisisted =
+      di.sl<CacheHelper>().getData(key: 'isOnboardingVisited') ?? false;
   @override
   void initState() {
     Future.delayed(
         const Duration(
           seconds: 2,
         ), () {
-      customReplacmentNavigation(context, '/onboarding');
+      if (isOnboardingVisisted) {
+        FirebaseAuth.instance.currentUser == null
+            ? customReplacmentNavigation(context, '/get')
+            : customReplacmentNavigation(context, '/products');
+      } else {
+        customNavigate(context, '/onboarding');
+      }
     });
     super.initState();
   }

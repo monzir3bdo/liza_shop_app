@@ -7,17 +7,14 @@ class RememberMeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
-        children: [
-          Text('Remember Me'),
-          SizedBox(
-            width: 210,
-          ),
-          CustomCupertinoSwitch(),
-        ],
-      ),
+    return const Row(
+      children: [
+        Text('Remember Me'),
+        SizedBox(
+          width: 210,
+        ),
+        CustomCupertinoSwitch(),
+      ],
     );
   }
 }

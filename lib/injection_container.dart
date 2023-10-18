@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/database/cache/cache_helper.dart';
 import 'package:ecommerce/core/network/network_info.dart';
 import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ecommerce/features/products/data/data_sourcs/product_remote_data_source.dart';
@@ -81,4 +82,6 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => http.Client(),
   );
+  //Splash
+  sl.registerSingleton<CacheHelper>(CacheHelper());
 }
