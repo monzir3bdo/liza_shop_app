@@ -1,6 +1,5 @@
 import 'package:ecommerce/core/functions/navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +25,9 @@ class _SplashPageState extends State<SplashPage> {
       if (isOnboardingVisisted) {
         FirebaseAuth.instance.currentUser == null
             ? customReplacmentNavigation(context, '/get')
-            : customReplacmentNavigation(context, '/products');
+            : FirebaseAuth.instance.currentUser!.emailVerified
+                ? customReplacmentNavigation(context, '/products')
+                : customNavigate(context, '/get');
       } else {
         customNavigate(context, '/onboarding');
       }

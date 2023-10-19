@@ -3,8 +3,6 @@ import 'package:ecommerce/features/auth/presentation/widgets/custom_bottom_text.
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/custom_login_form.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/functions/navigation.dart';
-
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 

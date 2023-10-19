@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ForgetPasswordWidget extends StatelessWidget {
+  final void Function()? onPressed;
   final String text;
-  const ForgetPasswordWidget({super.key, required this.text});
+  const ForgetPasswordWidget(
+      {super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class ForgetPasswordWidget extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerRight,
         child: TextButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: Text(
               text,
               style: const TextStyle(

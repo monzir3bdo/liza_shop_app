@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ecommerce/features/auth/presentation/cubit/foreget_password/forget_password_states.dart';
 import 'package:ecommerce/features/auth/presentation/cubit/log_in/login_states.dart';
 import 'package:ecommerce/features/auth/presentation/cubit/password_change_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +10,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   final GlobalKey<FormState> signUpKey = GlobalKey();
   final GlobalKey<FormState> logInKey = GlobalKey();
+  final GlobalKey<FormState> forgetKey = GlobalKey();
   late String emailAddress;
   late String password;
   late String userName;
@@ -23,6 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
         email: emailAddress,
         password: password,
       );
+      verifyEmail();
       emit(AuthSuccessState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -32,6 +35,8 @@ class AuthCubit extends Cubit<AuthState> {
       } else if (e.code == 'email-already-in-use') {
         emit(AuthFailureState(
             message: 'The account already exists for that email.'));
+      } else {
+        emit(AuthFailureState(message: e.code.toString()));
       }
     } catch (e) {
       emit(AuthFailureState(message: e.toString()));
@@ -46,10 +51,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(LoginSuccessState());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
         emit(LoginFailureState(message: 'No user found for that email.'));
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
         emit(LoginFailureState(message: 'No user found for that email.'));
       } else {
         emit(LoginFailureState(message: 'check your email and password!'));
@@ -68,5 +71,21 @@ class AuthCubit extends Cubit<AuthState> {
 
   signOut() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  void verifyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
+
+  void resetPassword() async {
+    try {
+      emit(ForgetPasswordLoadingState());
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: emailAddress,
+      );
+      emit(ForgetPasswordSuccessState());
+    } catch (e) {
+      emit(ForgetPasswordFailureState(message: e.toString()));
+    }
   }
 }

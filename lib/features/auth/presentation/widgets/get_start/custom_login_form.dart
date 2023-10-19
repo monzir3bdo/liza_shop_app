@@ -4,11 +4,11 @@ import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:ecommerce/features/auth/presentation/cubit/log_in/login_states.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/auth_form_field.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/remember_me_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../products/presentation/pages/products_page.dart';
 import 'forget_password_widget.dart';
 
 class CustomLoginForm extends StatelessWidget {
@@ -45,7 +45,12 @@ class CustomLoginForm extends StatelessWidget {
             const SizedBox(
               height: 28,
             ),
-            const ForgetPasswordWidget(text: 'ForgetPassword?'),
+            ForgetPasswordWidget(
+              text: 'ForgetPassword?',
+              onPressed: () {
+                customNavigate(context, '/forget');
+              },
+            ),
             const RememberMeWidget(),
             const SizedBox(
               height: 140,
@@ -67,8 +72,12 @@ class CustomLoginForm extends StatelessWidget {
       ),
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          customToast('Welcome in');
-          customReplacmentNavigation(context, '/products');
+          if (FirebaseAuth.instance.currentUser!.emailVerified) {
+            customToast('Welcome in');
+            customReplacmentNavigation(context, '/products');
+          } else {
+            customToast('Please Verify your account');
+          }
         } else if (state is LoginFailureState) {
           customToast(state.message);
         }

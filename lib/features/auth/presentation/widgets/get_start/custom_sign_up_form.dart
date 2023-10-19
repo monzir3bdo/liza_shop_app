@@ -1,15 +1,14 @@
 import 'package:ecommerce/core/functions/custom_toast.dart';
 import 'package:ecommerce/core/functions/navigation.dart';
 import 'package:ecommerce/core/widgets/loading_widget.dart';
-import 'package:ecommerce/features/auth/presentation/cubit/log_in/login_states.dart';
-import 'package:ecommerce/features/auth/presentation/pages/sign_up_page.dart';
+
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/auth_form_field.dart';
 import 'package:ecommerce/features/auth/presentation/widgets/get_start/remember_me_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../products/presentation/pages/products_page.dart';
 import '../../cubit/auth_cubit.dart';
 
 class CustomSignUpForm extends StatelessWidget {
@@ -22,8 +21,9 @@ class CustomSignUpForm extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccessState) {
-          customToast('Account created successfully');
-          customReplacmentNavigation(context, '/products');
+          FirebaseAuth.instance.currentUser!.emailVerified
+              ? customToast('Account created..Please Verify your email')
+              : customReplacmentNavigation(context, '/login');
         }
 
         if (state is AuthLoadingState) {
@@ -72,7 +72,7 @@ class CustomSignUpForm extends StatelessWidget {
                   height: 100,
                 ),
                 state is AuthLoadingState
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : CustomButton(
                         onPressed: () {
                           if (authCubit.signUpKey.currentState!.validate()) {

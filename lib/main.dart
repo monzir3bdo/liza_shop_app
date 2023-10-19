@@ -2,7 +2,6 @@ import 'package:ecommerce/core/app_router.dart';
 import 'package:ecommerce/core/database/cache/cache_helper.dart';
 import 'package:ecommerce/core/functions/check_state_changes.dart';
 import 'package:ecommerce/features/products/presentation/bloc/products/bloc/products_bloc.dart';
-import 'package:ecommerce/features/splash/presentation/pages/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection_container.dart' as di;
